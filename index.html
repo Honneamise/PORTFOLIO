@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Portfolio Calculator</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="bootstrap/bootstrap.min.css" rel="stylesheet">
+    <script src="bootstrap/bootstrap.bundle.min.js"></script>
+
+    <script src="chartjs/chart.umd.js"></script>
+
+    <script src="javascript/data.js"></script>
+    <script src="javascript/funcs.js"></script>
+    <script src="javascript/portfolio.js"></script>
+</head>
+<body onload="prepareView()">
+
+<div class="container mt-3">
+
+    <!-- TITLE -->
+    <div class="mt-4 p-5 bg-primary text-white rounded">
+        <h1>PORTFOLIO CALCULATOR</h1> 
+        <hr>
+        This website is a personal project, the source code is available at this <a class="link-light" href="https://github.com/Honneamise/PORTFOLIO">repository</a>.
+        Results of the gross returns and have been calculated considering the total reinvestment of the dividends with annual rebalancing. 
+        Payments of commissions and capital gains are excluded.
+        Data presented does not include adjustment for inflation.
+        <hr>
+        All contents are for educational and informational purposes only,
+        therefore they are not aimed in any way at solicitation of the purchase or sale of any security or investment.
+        The reader acknowledges his sole responsibility of any subsequent acts.
+        We do not guarantee the accuracy or the completeness of the contents of this website.
+        Consequently we will not be held liable for complaints or losses of any kind  
+        arising directly or indirectly from the use any data or materials on this site.
+        Finally we reserve the right to change at any time the contents and functions of this site. 
+    </div>
+
+    <!-- PORTFOLIO SECTION -->
+    <div class="container-sm w-50">
+        <div class="container-sm">
+            <h2>Portfolio</h2>
+        </div>
+
+        <div class="container-sm text-center">
+            <table class="table table-sm table-bordered text-center align-items-center justify-content-center" id="portfolio">
+                <tr class="table-primary">
+                    <th class="w-25">Investment</th>
+                    <th class="w-25">Start</th>
+                    <th class="w-25">End</th>
+                </tr>
+            
+                <tbody>
+                    <tr>
+                    <td class="w-25">
+                        <input type="number" class="form-control text-center" id="investment" value="100000" step="1000">
+                    </td>
+                    <td class="w-25">
+                        <select class="form-select text-center" id="start"></select>
+                    </td>
+                    <td class="w-25">
+                        <select class="form-select text-center" id="end"></select>
+                    </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- HOLDINGS SELECTOR -->
+    <div class="container-sm w-75">
+        <div class="row align-items-center text-center">
+            <div class="col-auto">
+                <h2>Holdings</h2>
+            </div>
+            
+            <div class="ms-auto col-auto justify-content-end">
+                <select class="form-select" id="holding"></select>
+            </div>
+            
+            <div class="col-auto justify-content-end">
+                <button type="submit" class="btn btn-primary" onclick="addHolding()">Add</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- HOLDINGS TABLE -->
+    <div class="container-sm w-75">
+        <table class="table table-sm table-bordered text-center" id="holdings">
+            <thead>
+                <tr class="table-primary">
+                <th class="w-50">Name</th>
+                <th class="w-25">Weight</th>
+                <th class="w-25"> </th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>   
+    </div>
+      
+    <!-- ANALYZE BUTTON -->
+    <div class="container-sm text-center">
+        <button type="submit" class="btn btn-primary" onclick="generateReport()">Generate Report</button>
+    </div>
+    
+    <!-- STATS SECTION -->
+    <div class="invisible container-sm w-75" id="stats-section">
+        <div class="container-sm">
+            <h2>Stats</h2>
+        </div>
+
+        <div class="container-sm">
+            <table class="table table-sm table-bordered text-center align-items-center justify-content-center" id="stats">
+                <thead>
+                    <tr class="table-primary">
+                    <th></th>
+                    <th>Final Balance</th>
+                    <th>Positive</th>
+                    <th>Max Drawdown</th>
+                    <th>Std Deviation</th>
+                    <th>Cagr</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- GRAPH SECTION -->
+    <div class="invisible container-sm w-75" id="graph-section">
+        <div class="container-sm">
+            <h2>Graph</h2>
+        </div>
+        <div class="border container-sm">
+            <canvas id="graph"></canvas>
+        </div>
+    </div>
+    
+    <!-- DETAILS SECTION -->
+    <div class="invisible container-sm" id="details-section">
+        <div class="container-sm w-75">
+            <h2>Details</h2>
+        </div>
+
+        <div class="container-sm w-75">
+            <table class="table table-sm table-bordered text-center align-items-center justify-content-center" id="details">
+                <thead>
+                    <tr class="table-primary">
+                    <th class="w-auto">Year</th>
+                    <th class="w-auto">Bench Returns</th>
+                    <th class="w-auto">Pf Returns</th>
+                    <th class="w-auto">Bench Balance</th>
+                    <th class="w-auto">PF Balance</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
+      
+</div>  
+</body>
+</html>
